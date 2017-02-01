@@ -167,6 +167,9 @@ map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
 map <leader>tm :tabmove
 
+" Use backspace for switching to previous buffer
+map <BS> :b#<cr>
+
 " Opens a new tab with the current buffer's path
 " Super useful when editing files in the same directory
 map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
@@ -276,6 +279,12 @@ set undodir=~/.config/nvim/undodir
 set undofile
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => NeoVim Terminal
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Exit terminal mode using escape
+tnoremap <Esc> <C-\><C-n>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Misc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remove the Windows ^M - when the encodings gets messed up
@@ -369,6 +378,17 @@ Plug 'scrooloose/nerdtree'
 " Git wrapper
 Plug 'tpope/vim-fugitive'
 
+" Autocomplete
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
+" Surround
+Plug 'tpope/vim-surround'
+
+" Clojure Support
+Plug 'tpope/vim-fireplace'          " REPL
+Plug 'clojure-vim/async-clj-omni'   " Autocomplete
+Plug 'vim-scripts/paredit.vim'      " Working with sexps
+
 " Initialize plugin system
 call plug#end()
 
@@ -407,3 +427,14 @@ let g:NERDCommentEmptyLines = 1
 let NERDTreeIgnore=['\.pyc$', '\~$'] 
 " F12 opens nerdtree
 map <F12> :NERDTreeToggle<cr>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Deoplete
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+call deoplete#enable()
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Clojure
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:deoplete#keyword_patterns = {}
+let g:deoplete#keyword_patterns.clojure = '[\w!$%&*+/:<=>?@\^_~\-\.#]*'
