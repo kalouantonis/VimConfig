@@ -269,6 +269,11 @@ map <leader>sp [s
 map <leader>sa zg
 map <leader>s? z=
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Persistent undos
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set undodir=~/.config/nvim/undodir
+set undofile
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Misc
@@ -352,15 +357,53 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
+" Syntax checking
+Plug 'neomake/neomake'
+
+" Comment functions
+Plug 'scrooloose/nerdcommenter'
+
+" File tree
+Plug 'scrooloose/nerdtree'
+
+" Git wrapper
+Plug 'tpope/vim-fugitive'
+
 " Initialize plugin system
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" FZF
+" => FZF
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " File search
 map <leader>f :Files<cr>
 " Word search
 map <leader>a :Ag<cr>
 " Buffer search
-map <leader>b :Buffers<cr>
+map <leader>e :Buffers<cr>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Neomake
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Asynchronously run syntax checker on entering a new buffer
+autocmd! BufEnter * Neomake
+" Asynchronously run syntax checker on change in buffer
+autocmd! InsertChange,TextChanged * update | Neomake
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => NERDCommenter
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" Allow commenting and inverting empty lines 
+" (useful when commenting regions)
+let g:NERDCommentEmptyLines = 1
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => NERDTree
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Ignore files in NERDTree
+let NERDTreeIgnore=['\.pyc$', '\~$'] 
+" F12 opens nerdtree
+map <F12> :NERDTreeToggle<cr>
