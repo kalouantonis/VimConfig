@@ -425,8 +425,8 @@ let g:NERDCommentEmptyLines = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Ignore files in NERDTree
 let NERDTreeIgnore=['\.pyc$', '\~$'] 
-" F12 opens nerdtree
-map <F12> :NERDTreeToggle<cr>
+" F2 opens nerdtree
+map <F2> :NERDTreeToggle<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Deoplete
